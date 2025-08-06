@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Bentley Clicker</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+    }
+    body {
+      padding: 20px;
+      box-sizing: border-box;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    h1 {
+      margin-bottom: 20px;
+      user-select: none;
+    }
+    #score {
+      font-size: 3rem;
+      font-family: monospace;
+      margin: 20px 0;
+      user-select: none;
+      word-break: break-word;
+    }
+    #click-image {
+      width: 150px;
+      cursor: pointer;
+      user-select: none;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .upgrade-button {
+      background-color: #ff9800;
+    }
+    .upgrade-button:hover {
+      background-color: #e07b00;
+    }
+    .save-load {
+      background-color: #008cba;
+    }
+    .save-load:hover {
+      background-color: #006a94;
+    }
+    #save-code {
+      margin-top: 20px;
+      font-family: monospace;
+      word-wrap: break-word;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      max-width: 100%;
+      user-select: all;
+    }
+    #load-code-input {
+      margin-top: 20px;
+      display: none;
+    }
+    #load-code-input input {
+      padding: 10px;
+      width: 80%;
+      font-family: monospace;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #load-code-input button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+    /* Bottom image styled same as top */
+    #locked-footer {
+      margin-top: 30px;
+      user-select: none;
+    }
+    #locked-footer img {
+      width: 150px;
+      cursor: pointer;
+      user-select: none;
+    }
+    /* Console overlay */
+    #console-overlay {
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      background: #222;
+      color: #0f0;
+      font-family: monospace;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #0f0;
+      display: none;
+      z-index: 9999;
+    }
+    #console-input {
+      width: 100%;
+      background: #111;
+      border: none;
+      color: #0f0;
+      font-family: monospace;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+      box-sizing: border-box;
+      outline: none;
+    }
+    #console-output {
+      max-height: 150px;
+      overflow-y: auto;
+      margin-top: 10px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bentley Clicker</h1>
+  <img
+    id="click-image"
+    src="https://iili.io/FPOEjgS.md.jpg"
+    alt="Clicker"
+  />
+
+  <div id="score">0</div>
+
+  <div>
+    <button class="upgrade-button" onclick="buyUpgrade(0)">
+      Upgrade 1 (+1 auto-click/sec) Cost: <span id="cost-0">10</span>
+    </button>
+    <button class="upgrade-button" onclick="buyUpgrade(1)">
+      Upgrade 2 (+2 auto-click/sec) Cost: <span id="cost-1">50</span>
+    </button>
+    <button class="upgrade-button" onclick="buyUpgrade(2)">
+      Auto-Clicker (+1 auto-click/sec) Cost: <span id="cost-2">1000</span>
+    </button>
+  </div>
+
+  <div class="save-buttons">
+    <button class="save-load" onclick="saveGame()">???? Save Game</button>
+    <button class="save-load" onclick="loadGame()">???? Load Game</button>
+    <button class="save-load" onclick="toggleLoadInput()">???? Load from Code</button>
+  </div>
+
+  <div id="save-code">{output}</div>
+
+  <div id="load-code-input">
+    <input
+      type="text"
+      id="manual-save-code"
+      placeholder="Paste your save code here..."
+    /><br />
+    <button onclick="loadFromCode()">Load Code</button>
+  </div>
+
+  <div id="locked-footer">
+    <img
+      src="https://iili.io/FPOEjgS.md.jpg"
+      alt="Clicker Bottom Image"
+    />
+  </div>
+
+  <div id="console-overlay">
+    <input
+      type="text"
+      id="console-input"
+      placeholder="Type command, e.g. set score 1000"
+      autocomplete="off"
+    />
+    <div id="console-output"></div>
+  </div>
+
+<script>
+  let score = 0;
+  let upgrades = [0, 0, 0];
+  const baseCosts = [10, 50, 1000];
+
+  const scoreDisplay = document.getElementById("score");
+  const clickImage = document.getElementById("click-image");
+  const saveCodeDisplay = document.getElementById("save-code");
+  const loadCodeInput = document.getElementById("load-code-input");
+  const manualSaveCodeInput = document.getElementById("manual-save-code");
+  const costDisplays = [
+    document.getElementById("cost-0"),
+    document.getElementById("cost-1"),
+    document.getElementById("cost-2"),
+  ];
+
+  const consoleOverlay = document.getElementById("console-overlay");
+  const consoleInput = document.getElementById("console-input");
+  const consoleOutput = document.getElementById("console-output");
+
+  let secretCode = "";
+  const secretPass = "5/11/2011";
+
+  function getCost(i) {
+    return baseCosts[i] + upgrades[i] * Math.floor(baseCosts[i] * 0.5);
+  }
+
+  function updateCosts() {
+    for (let i = 0; i < costDisplays.length; i++) {
+      costDisplays[i].textContent = getCost(i);
+    }
+  }
+
+  function updateScore() {
+    scoreDisplay.textContent = score.toString(2);
+  }
+
+  function toBinaryString(str) {
+    return str
+      .split("")
+      .map((c) => c.charCodeAt(0).toString(2).padStart(8, "0"))
+      .join("");
+  }
+
+  function fromBinaryString(bin) {
+    return bin
+      .match(/.{1,8}/g)
+      .map((byte) => String.fromCharCode(parseInt(byte, 2)))
+      .join("");
+  }
+
+  function encodeCustomBase(binStr) {
+    return binStr.replace(/0/g, "7");
+  }
+
+  function decodeCustomBase(customStr) {
+    return customStr.replace(/7/g, "0");
+  }
+
+  function saveGame() {
+    const saveData = {
+      clicks: score,
+      upgrades: upgrades,
+    };
+    const jsonString = JSON.stringify(saveData);
+    const bin = toBinaryString(jsonString);
+    const custom = encodeCustomBase(bin);
+    const base64 = btoa(custom);
+    localStorage.setItem("bentleySave", base64);
+    saveCodeDisplay.textContent = base64;
+    alert("Game saved!");
+  }
+
+  function loadGame() {
+    const base64 = localStorage.getItem("bentleySave");
+    if (!base64) return alert("No save found.");
+    try {
+      const custom = atob(base64);
+      const bin = decodeCustomBase(custom);
+      const jsonString = fromBinaryString(bin);
+      const saveData = JSON.parse(jsonString);
+      score = saveData.clicks || 0;
+      upgrades = saveData.upgrades || [0, 0, 0];
+      updateCosts();
+      updateScore();
+      saveCodeDisplay.textContent = base64;
+      alert("Game loaded!");
+    } catch (e) {
+      alert("Error loading save.");
+    }
+  }
+
+  function toggleLoadInput() {
+    loadCodeInput.style.display =
+      loadCodeInput.style.display === "none" ? "block" : "none";
+  }
+
+  function loadFromCode() {
+    const base64 = manualSaveCodeInput.value.trim();
+    if (!base64) return alert("Please enter a save code.");
+    try {
+      const custom = atob(base64);
+      const bin = decodeCustomBase(custom);
+      const jsonString = fromBinaryString(bin);
+      const saveData = JSON.parse(jsonString);
+      score = saveData.clicks || 0;
+      upgrades = saveData.upgrades || [0, 0, 0];
+      updateCosts();
+      updateScore();
+      saveCodeDisplay.textContent = base64;
+      alert("Game loaded from code!");
+    } catch (e) {
+      alert("Invalid save code.");
+    }
+  }
+
+  function buyUpgrade(i) {
+    const cost = getCost(i);
+    if (score >= cost) {
+      score -= cost;
+      upgrades[i]++;
+      updateCosts();
+      updateScore();
+    } else {
+      alert("Not enough clicks!");
+    }
+  }
+
+  clickImage.addEventListener("click", () => {
+    score += 1; // exactly 1 per click
+    updateScore();
+  });
+
+  setInterval(() => {
+    const autoClicks =
+      (upgrades[0] || 0) * 1 +
+      (upgrades[1] || 0) * 2 +
+      (upgrades[2] || 0) * 1;
+    if (autoClicks > 0) {
+      score += autoClicks;
+      updateScore();
+    }
+  }, 1000);
+
+  updateCosts();
+  updateScore();
+
+  // --- Console Logic ---
+
+  window.addEventListener("keydown", (e) => {
+    // Toggle console with F11
+    if (e.key === "F11") {
+      e.preventDefault();
+      toggleConsole();
+    } else if (e.key.length === 1) {
+      // Track secret code typing
+      secretCode += e.key;
+      if (!secretPass.startsWith(secretCode)) {
+        secretCode = ""; // reset if wrong
+      }
+      if (secretCode === secretPass) {
+        toggleConsole();
+        secretCode = "";
+      }
+    }
+  });
+
+  function toggleConsole() {
+    if (consoleOverlay.style.display === "block") {
+      consoleOverlay.style.display = "none";
+      consoleOutput.textContent = "";
+      consoleInput.value = "";
+    } else {
+      consoleOverlay.style.display = "block";
+      consoleInput.focus();
+    }
+  }
+
+  consoleInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const input = consoleInput.value.trim();
+      if (input) {
+        handleConsoleCommand(input);
+        consoleInput.value = "";
+      }
+    }
+  });
+
+  function handleConsoleCommand(cmd) {
+    const args = cmd.split(" ");
+    const command = args[0].toLowerCase();
+
+    switch (command) {
+      case "set":
+        if (args[1] === "score") {
+          const val = parseInt(args[2], 10);
+          if (!isNaN(val)) {
+            score = val;
+            updateScore();
+            logConsole(`Score set to ${val}`);
+          } else {
+            logConsole("Invalid number for score.");
+          }
+        } else if (args[1] === "upgrades") {
+          // Example: set upgrades 1,2,3
+          const upStr = args.slice(2).join(" ");
+          const upArr = upStr.split(",").map((x) => parseInt(x.trim(), 10));
+          if (upArr.length === 3 && upArr.every((n) => !isNaN(n) && n >= 0)) {
+            upgrades = upArr;
+            updateCosts();
+            updateScore();
+            logConsole(`Upgrades set to ${upArr.join(", ")}`);
+          } else {
+            logConsole("Invalid upgrades format. Use: set upgrades 1,2,3");
+          }
+        } else {
+          logConsole("Unknown set command. Use: set score or set upgrades");
+        }
+        break;
+      case "help":
+        logConsole("Commands:
+ - set score [number]
+ - set upgrades [x,y,z]
+ - help
+ - close");
+        break;
+      case "close":
+        toggleConsole();
+        break;
+      default:
+        logConsole(`Unknown command: ${command}`);
+    }
+  }
+
+  function logConsole(msg) {
+    consoleOutput.textContent += msg + "
+";
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+  }
+</script>
+</body>
+</html>
