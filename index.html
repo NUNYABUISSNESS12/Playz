@@ -25,6 +25,7 @@
             max-width: 300px;
             border-radius: 10px;
             margin-top: 20px;
+            cursor: pointer;
         }
         .video-links {
             margin-top: 30px;
@@ -62,8 +63,10 @@
         <h2>Subscribe to Bentley Playz on YouTube</h2>
     </a>
 
-    <!-- Picture of Bentley -->
-    <img src="https://iili.io/FPOEjgS.md.jpg" alt="Bentley Playz">
+    <!-- Clickable Image of Bentley (Triggers after 5 clicks) -->
+    <a href="http://bentleyplayz.com" target="_blank" onclick="handleImageClick(event)">
+        <img src="https://iili.io/FPOEjgS.md.jpg" alt="Bentley Playz" id="bentleyImage">
+    </a>
 
     <!-- Link to 2011stories.com -->
     <div>
@@ -80,5 +83,17 @@
         </div>
     </div>
 
+    <script>
+        let clickCount = 0;
+
+        function handleImageClick(event) {
+            clickCount++;
+            if (clickCount >= 5) {
+                window.location.href = "https://bentleyplayz.com/clicker";
+                event.preventDefault(); // Stop the default link from opening
+            }
+        }
+    </script>
+
 </body>
-</html>
+</html
