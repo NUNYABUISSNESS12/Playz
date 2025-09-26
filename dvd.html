@@ -1,139 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DVD Bounce with Upload & Counter</title>
-<style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        background-color: #000;
-        font-family: sans-serif;
+  <meta charset="UTF-8">
+  <title>DVD Screensaver</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      overflow: hidden;
+      height: 100%;
     }
-    #dvd {
-        position: absolute;
-        width: 20vw;
-        max-width: 150px;
-        height: auto;
-        transition: transform 0.1s linear;
+
+    #dvd-logo {
+      position: absolute;
+      width: 150px;
+      height: auto;
     }
-    #fileInput {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
-        z-index: 20;
+
+    #upload-section {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: none;
+      z-index: 10;
     }
-    #cornerCounter {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 10vw;
-        color: #000;
-        display: none;
-        z-index: 10;
-        pointer-events: none;
+
+    #upload-section input {
+      font-size: 16px;
     }
-</style>
+  </style>
 </head>
 <body>
-<img id="dvd" src="https://iili.io/FPOEjgS.md.jpg" alt="Bouncing DVD">
-<input type="file" id="fileInput" accept="image/*">
-<div id="cornerCounter">1</div>
+  <div id="upload-section">
+    <input type="file" id="imageUploader" accept="image/*">
+  </div>
 
-<script>
-const dvd = document.getElementById('dvd');
-const fileInput = document.getElementById('fileInput');
-const counterDiv = document.getElementById('cornerCounter');
+  <img id="dvd-logo" src="https://iili.io/FPOEjgS.md.jpg" alt="DVD Logo">
 
-let x = 0, y = 0, dx = 2, dy = 2;
-let cornerHits = 0;
+  <script>
+    const logo = document.getElementById('dvd-logo');
+    const uploadSection = document.getElementById('upload-section');
+    const imageUploader = document.getElementById('imageUploader');
 
-// Check for upload hash
-if (window.location.hash === '#upload') {
-    fileInput.style.display = 'block';
-    fileInput.addEventListener('change', handleFile);
-}
+    let x = 200, y = 200;
+    let dx = 2, dy = 2;
 
-function handleFile(event) {
-    const file = event.target.files[0];
-    if (file) {
+    function moveLogo() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const logoWidth = logo.clientWidth;
+      const logoHeight = logo.clientHeight;
+
+      x += dx;
+      y += dy;
+
+      if (x + logoWidth >= screenWidth || x <= 0) dx *= -1;
+      if (y + logoHeight >= screenHeight || y <= 0) dy *= -1;
+
+      logo.style.left = x + 'px';
+      logo.style.top = y + 'px';
+
+      requestAnimationFrame(moveLogo);
+    }
+
+    moveLogo();
+
+    // If URL ends in #upload, show upload input
+    if (window.location.hash === '#upload') {
+      uploadSection.style.display = 'block';
+    }
+
+    imageUploader.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
-            dvd.src = e.target.result;
+        reader.onload = function(evt) {
+          logo.src = evt.target.result;
         };
         reader.readAsDataURL(file);
-        fileInput.style.display = 'none';
-        // Remove #upload so counter works
-        window.location.hash = '#0';
-    }
-}
-
-function moveDVD() {
-    const dvdWidth = dvd.offsetWidth;
-    const dvdHeight = dvd.offsetHeight;
-    const maxX = window.innerWidth - dvdWidth;
-    const maxY = window.innerHeight - dvdHeight;
-
-    x += dx;
-    y += dy;
-
-    let hitCorner = false;
-
-    // Bounce off edges
-    if (x <= 0 || x >= maxX) dx = -dx;
-    if (y <= 0 || y >= maxY) dy = -dy;
-
-    // Detect corner
-    if ((x <= 0 && y <= 0) || (x <= 0 && y >= maxY) || (x >= maxX && y <= 0) || (x >= maxX && y >= maxY)) {
-        hitCorner = true;
-    }
-
-    if (hitCorner) triggerCornerEffect();
-    
-    dvd.style.left = x + 'px';
-    dvd.style.top = y + 'px';
-
-    requestAnimationFrame(moveDVD);
-}
-
-function triggerCornerEffect() {
-    cornerHits++;
-    counterDiv.textContent = cornerHits;
-    counterDiv.style.display = 'block';
-    document.body.style.backgroundColor = '#00ff00';
-    // Update URL hash
-    window.location.hash = `#${cornerHits}`;
-    
-    // Remove effect after 2 seconds
-    setTimeout(() => {
-        counterDiv.style.display = 'none';
-        document.body.style.backgroundColor = '#000';
-    }, 2000);
-}
-
-// Random starting position
-function setRandomStart() {
-    x = Math.random() * (window.innerWidth - dvd.offsetWidth);
-    y = Math.random() * (window.innerHeight - dvd.offsetHeight);
-}
-
-setRandomStart();
-
-// Adjust speed for screen size
-const speedFactor = Math.min(window.innerWidth, window.innerHeight) / 500;
-dx *= speedFactor;
-dy *= speedFactor;
-
-moveDVD();
-
-window.addEventListener('resize', () => {
-    x = Math.min(x, window.innerWidth - dvd.offsetWidth);
-    y = Math.min(y, window.innerHeight - dvd.offsetHeight);
-});
-</script>
+      }
+    });
+  </script>
 </body>
 </html>
