@@ -48,29 +48,6 @@
             cursor: pointer;
         }
 
-        .video-links {
-            margin-top: 30px;
-        }
-
-        .video-links a {
-            display: block;
-            margin: 10px 0;
-            color: #1a73e8;
-            text-decoration: none;
-        }
-
-        .video-links a:hover {
-            text-decoration: underline;
-        }
-
-        h1, p {
-            margin-top: 20px;
-        }
-
-        .highlight-section {
-            margin-top: 50px;
-        }
-
         iframe {
             width: 100%;
             max-width: 560px;
@@ -81,7 +58,6 @@
 </head>
 <body>
 
-    <!-- 🔝 Top Navigation Bar -->
     <nav>
         <a href="https://bentleyplayz.com/clicker">Clicker</a>
         <a href="https://bentleyplayz.com/SpongeBob">SpongeBob</a>
@@ -98,7 +74,6 @@
     <h1>Welcome to Bentley Playz's Website</h1>
     <p>Check out the latest content and highlights below!</p>
 
-    <!-- YouTube Channel Link -->
     <a href="https://youtube.com/@bentleyplayz-bl3ip?sub_confirmitation=1" target="_blank">
         <h2>Subscribe to Bentley Playz on YouTube</h2>
     </a>
@@ -107,18 +82,16 @@
         <h2>Checkout Gaming Channel</h2>
     </a>
 
-    <!-- Clickable Image of Bentley (Cycles images + triggers after 5 clicks) -->
+    <!-- 🔄 AUTO-CYCLING + CLICK-CYCLING IMAGE -->
     <a href="https://bentleyplayz.com/clicker" target="_blank" onclick="handleImageClick(event)">
         <img src="https://iili.io/FPOEjgS.md.jpg" alt="Bentley Playz" id="bentleyImage">
     </a>
 
-    <!-- Link to 2011stories.com -->
     <div>
         <p>Visit my other project: <a href="http://2011stories.com" target="_blank">2011 Stories</a></p>
         <p>Visit my other project: BACKUP <a href="https://2011stories.bentleyplayz.com/" target="_blank">2011 Stories</a></p>
     </div>
 
-    <!-- Highlight Videos Section -->
     <div class="highlight-section">
         <h2>Highlight Videos</h2>
         <div>
@@ -131,25 +104,31 @@
     <script>
         let clickCount = 0;
 
-        // 🔄 Images to cycle through
+        // 🔄 Images for cycling
         const images = [
-            "https://iili.io/FPOEjgS.md.jpg",   // First image
-            "IMG_8357 (1).jpg"                  // Second image — make sure it's uploaded on your server
+            "https://iili.io/FPOEjgS.md.jpg",
+            "https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/6db6343cd065cf09bbb10b74db6f31e9d7073895/IMG_8357%20(1).jpg"
         ];
 
         let imageIndex = 0;
 
+        // 🔁 Auto-cycle every 3 seconds
+        setInterval(() => {
+            imageIndex = (imageIndex + 1) % images.length;
+            document.getElementById("bentleyImage").src = images[imageIndex];
+        }, 3000); // change 3000 → 5000 for 5 seconds, etc.
+
+        // 🖱️ Click cycle + after 5 clicks redirect
         function handleImageClick(event) {
             clickCount++;
 
-            // Cycle image
+            // Also cycle on click
             imageIndex = (imageIndex + 1) % images.length;
             document.getElementById("bentleyImage").src = images[imageIndex];
 
-            // After 5 clicks redirect
             if (clickCount >= 5) {
-                window.location.href = "https://bentleyplayz.com/clicker";
                 event.preventDefault();
+                window.location.href = "https://bentleyplayz.com/clicker";
             }
         }
     </script>
