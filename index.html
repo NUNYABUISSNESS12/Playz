@@ -14,6 +14,7 @@
     <meta name="twitter:image" content="https://iili.io/FPOEjgS.md.jpg">
     <meta name="twitter:url" content="http://bentleyplayz.com">
     <title>Bentley Playz</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -88,11 +89,10 @@
         <a href="https://bentleyplayz.com/dvd">DVD Screensaver</a>
         <a href="https://bentleyplayz.com/dvd#upload">Upload Image DVD Screensaver</a>
         <a href="https://games.bentleyplayz.com" target="_blank">
-  <button style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
-    Visit BentleyPlayz Games
-  </button>
-</a>
-
+            <button style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+                Visit BentleyPlayz Games
+            </button>
+        </a>
     </nav>
 
     <h1>Welcome to Bentley Playz's Website</h1>
@@ -102,11 +102,12 @@
     <a href="https://youtube.com/@bentleyplayz-bl3ip?sub_confirmitation=1" target="_blank">
         <h2>Subscribe to Bentley Playz on YouTube</h2>
     </a>
-        <a href="https://www.youtube.com/@BentleyplayzShorts-om6pc" target="_blank">
-        <h2>"Checkout Gaming Channel</h2>
+
+    <a href="https://www.youtube.com/@BentleyplayzShorts-om6pc" target="_blank">
+        <h2>Checkout Gaming Channel</h2>
     </a>
 
-    <!-- Clickable Image of Bentley (Triggers after 5 clicks) -->
+    <!-- Clickable Image of Bentley (Cycles images + triggers after 5 clicks) -->
     <a href="https://bentleyplayz.com/clicker" target="_blank" onclick="handleImageClick(event)">
         <img src="https://iili.io/FPOEjgS.md.jpg" alt="Bentley Playz" id="bentleyImage">
     </a>
@@ -114,27 +115,41 @@
     <!-- Link to 2011stories.com -->
     <div>
         <p>Visit my other project: <a href="http://2011stories.com" target="_blank">2011 Stories</a></p>
-                <p>Visit my other project: BACKUP <a href="https://2011stories.bentleyplayz.com/" target="_blank">2011 Stories</a></p>
+        <p>Visit my other project: BACKUP <a href="https://2011stories.bentleyplayz.com/" target="_blank">2011 Stories</a></p>
     </div>
 
     <!-- Highlight Videos Section -->
     <div class="highlight-section">
         <h2>Highlight Videos</h2>
         <div>
-            <iframe src="https://www.youtube.com/embed/gkNJtehoMow" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/hY1zdhwbwiE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/PE024W9OIiA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/gkNJtehoMow" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/hY1zdhwbwiE" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/PE024W9OIiA" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
         let clickCount = 0;
 
+        // 🔄 Images to cycle through
+        const images = [
+            "https://iili.io/FPOEjgS.md.jpg",   // First image
+            "IMG_8357 (1).jpg"                  // Second image — make sure it's uploaded on your server
+        ];
+
+        let imageIndex = 0;
+
         function handleImageClick(event) {
             clickCount++;
+
+            // Cycle image
+            imageIndex = (imageIndex + 1) % images.length;
+            document.getElementById("bentleyImage").src = images[imageIndex];
+
+            // After 5 clicks redirect
             if (clickCount >= 5) {
                 window.location.href = "https://bentleyplayz.com/clicker";
-                event.preventDefault(); // Stop the default link from opening
+                event.preventDefault();
             }
         }
     </script>
