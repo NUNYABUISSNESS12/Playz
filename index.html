@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Bentley Playz - Official Website">
     <meta property="og:description" content="Welcome to Bentley Playz's website! Check out the latest content, highlights, and my other projects.">
-    <meta property="og:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg">
+    <meta property="og:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1">
     <meta property="og:url" content="http://bentleyplayz.com">
     <meta property="og:type" content="website">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bentley Playz - Official Website">
     <meta name="twitter:description" content="Welcome to Bentley Playz's website! Check out the latest content, highlights, and my other projects.">
-    <meta name="twitter:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg">
+    <meta name="twitter:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1">
     <meta name="twitter:url" content="http://bentleyplayz.com">
+
     <title>Bentley Playz</title>
 
     <style>
@@ -73,12 +75,14 @@
 
     <h1>Welcome to Bentley Playz's Website</h1>
     <p>Check out the latest content and highlights below!</p>
-            <a href="https://blogs.bentleyplayz.com" target="_blank">
-            <button style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
-                Visit New Blog Page
-            </button>
 
-    <a href="https://youtube.com/@bentleyplayz-bl3ip?sub_confirmitation=1" target="_blank">
+    <a href="https://blogs.bentleyplayz.com" target="_blank">
+        <button style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+            Visit New Blog Page
+        </button>
+    </a>
+
+    <a href="https://youtube.com/@bentleyplayz-bl3ip?sub_confirmation=1" target="_blank">
         <h2>Subscribe to Bentley Playz on YouTube</h2>
     </a>
 
@@ -86,14 +90,18 @@
         <h2>Checkout Gaming Channel</h2>
     </a>
 
-    <!-- 🔄 AUTO-CYCLING + CLICK-CYCLING IMAGE -->
+    <!-- Auto-cycling + click-cycling image -->
     <a href="https://bentleyplayz.com/clicker" target="_blank" onclick="handleImageClick(event)">
-        <img src="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg alt="Bentley Playz" id="bentleyImage">
+        <img 
+            src="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1" 
+            alt="Bentley Playz" 
+            id="bentleyImage"
+        >
     </a>
 
     <div>
         <p>Visit my other project: <a href="http://2011stories.com" target="_blank">2011 Stories</a></p>
-        <p>Visit my other project: BACKUP <a href="https://2011stories.bentleyplayz.com/" target="_blank">2011 Stories</a></p>
+        <p>Backup site: <a href="https://2011stories.bentleyplayz.com/" target="_blank">2011 Stories</a></p>
     </div>
 
     <div class="highlight-section">
@@ -108,25 +116,24 @@
     <script>
         let clickCount = 0;
 
-        // 🔄 Images for cycling
+        // Images for cycling
         const images = [
-            "https://iili.io/FPOEjgS.md.jpg",
+            "https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1",
             "https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/6db6343cd065cf09bbb10b74db6f31e9d7073895/IMG_8357%20(1).jpg"
         ];
 
         let imageIndex = 0;
 
-        // 🔁 Auto-cycle every 3 seconds
+        // Auto-cycle every 3 seconds
         setInterval(() => {
             imageIndex = (imageIndex + 1) % images.length;
             document.getElementById("bentleyImage").src = images[imageIndex];
-        }, 2000); // change 3000 → 5000 for 5 seconds, etc.
+        }, 2000);
 
-        // 🖱️ Click cycle + after 5 clicks redirect
+        // Click cycle + redirect after 5 clicks
         function handleImageClick(event) {
             clickCount++;
 
-            // Also cycle on click
             imageIndex = (imageIndex + 1) % images.length;
             document.getElementById("bentleyImage").src = images[imageIndex];
 
