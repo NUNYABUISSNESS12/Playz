@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Open Graph (Discord, Facebook, iMessage) -->
+<meta property="og:title" content="AI vs Real Challenge – Can You Spot the Fakes?">
+<meta property="og:description" content="Think you can tell what's AI-generated and what's real? Watch random videos, choose AI or REAL, and see if you can score 100%!">
+<meta property="og:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1">
+<meta property="og:url" content="https://bentleyplayz.com/ai">
+<meta property="og:type" content="website">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI vs Real Challenge – Can You Spot the Fakes?">
+<meta name="twitter:description" content="Test your skills! Random videos appear and you must guess: AI or REAL? Every guess scores. No repeats. Try now!">
+<meta name="twitter:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1">
+<meta name="twitter:url" content="https://bentleyplayz.com/ai">
+
+    <meta charset="UTF-8">
+    <title>AI or Real Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+            background: #111;
+            color: white;
+        }
+        iframe {
+            width: 360px;
+            height: 640px;
+            border: none;
+            border-radius: 10px;
+        }
+        .btn {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+        }
+        .real { background: #28a745; color: white; }
+        .ai { background: #007bff; color: white; }
+        .continue { background: #ffc107; color: black; }
+    </style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+// -----------------------------------------------------------
+// VIDEO LIST
+// -----------------------------------------------------------
+const introID = "-a73rOhTppo";
+const videos = [
+    { id: "tBZlEVyoZz8", answer: "REAL" },
+    { id: "1X0mzHNSiz8", answer: "REAL" },
+    { id: "NonVd-wJnHM", answer: "AI" },
+    { id: "2RqHS9xGswU", answer: "AI" },
+    { id: "COMYydVnqhQ", answer: "AI" },
+    { id: "1XtIqZp2apYA", answer: "AI" }
+];
+
+let score = 0;
+
+// -----------------------------------------------------------
+// COOKIE SYSTEM
+// -----------------------------------------------------------
+function setCookie(name, value, hours) {
+    let expires = "";
+    if (hours) {
+        const date = new Date();
+        date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for (let c of ca) {
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0)
+            return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+// load cookie list
+let usedVideos = JSON.parse(getCookie("used_videos") || "[]");
+
+// filter videos to exclude used ones
+function getRemainingVideos() {
+    return videos.filter(v => !usedVideos.includes(v.id));
+}
+
+// -----------------------------------------------------------
+// INTRO SCREEN
+// -----------------------------------------------------------
+function loadIntro() {
+    document.getElementById("app").innerHTML = `
+        <h1>AI or Real Challenge</h1>
+        <p>Watch the intro, then press continue.</p>
+        <iframe src="https://www.youtube.com/embed/${introID}"></iframe><br>
+        <button class="btn continue" onclick="startGame()">Continue</button>
+    `;
+}
+
+// -----------------------------------------------------------
+// START GAME (RANDOM, NO REPEAT)
+// -----------------------------------------------------------
+function startGame() {
+    let remaining = getRemainingVideos();
+
+    if (remaining.length === 0) {
+        return endGame();
+    }
+
+    // pick random video
+    const randomIndex = Math.floor(Math.random() * remaining.length);
+    const current = remaining[randomIndex];
+
+    // store as used in cookie
+    usedVideos.push(current.id);
+    setCookie("used_videos", JSON.stringify(usedVideos), 24); // 24 hours
+
+    document.getElementById("app").innerHTML = `
+        <h2>Is this AI or REAL?</h2>
+        <iframe src="https://www.youtube.com/embed/${current.id}"></iframe>
+        <br>
+        <button class="btn real" onclick="checkAnswer('REAL', '${current.answer}')">REAL</button>
+        <button class="btn ai" onclick="checkAnswer('AI', '${current.answer}')">AI</button>
+    `;
+}
+
+// -----------------------------------------------------------
+// CHECK ANSWER
+// -----------------------------------------------------------
+function checkAnswer(choice, correct) {
+    if (choice === correct) score++;
+    startGame();
+}
+
+// -----------------------------------------------------------
+// END SCREEN
+// -----------------------------------------------------------
+function endGame() {
+    let total = videos.length;
+    let used = usedVideos.length;
+
+    document.getElementById("app").innerHTML = `
+        <h1>All videos completed!</h1>
+        <h2>Your Score: ${score} / ${used}</h2>
+        <p>You have finished all unique videos saved in your browser.</p>
+        <button class="btn continue" onclick="resetCookies()">Reset Videos</button>
+    `;
+}
+
+function resetCookies() {
+    setCookie("used_videos", "[]", 24);
+    location.reload();
+}
+
+// -----------------------------------------------------------
+// START
+// -----------------------------------------------------------
+loadIntro();
+</script>
+
+</body>
+</html>
+
