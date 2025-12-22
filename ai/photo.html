@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess if Photo is Real or AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+        .photo-section {
+            margin-bottom: 40px;
+        }
+        img {
+            max-width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Guess if the Photo is Real or AI-Generated</h1>
+    <p>Click your guess below each image!</p>
+
+    <div class="photo-section">
+        <h2>Photo 1</h2>
+        <img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/ai/ChatGPT%20Image%20Dec%2022%2C%202025%2C%2012_04_51%20PM.png" alt="Photo 1"><br>
+        <button onclick="checkAnswer(1, 'ai')">AI</button>
+        <button onclick="checkAnswer(1, 'real')">Real</button>
+        <p id="result1"></p>
+    </div>
+
+    <div class="photo-section">
+        <h2>Photo 2</h2>
+        <img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/ai/c1bf0620-c736-4263-9783-8e401bbbf22a-md.jpeg" alt="Photo 2"><br>
+        <button onclick="checkAnswer(2, 'ai')">AI</button>
+        <button onclick="checkAnswer(2, 'real')">Real</button>
+        <p id="result2"></p>
+    </div>
+
+    <script>
+        // Both photos are AI
+        const answers = {
+            1: 'ai',
+            2: 'ai'
+        };
+
+        function checkAnswer(photoNumber, guess) {
+            const resultElem = document.getElementById(`result${photoNumber}`);
+            if (guess === answers[photoNumber]) {
+                resultElem.textContent = "✅ Correct! This is AI-generated.";
+                resultElem.style.color = "green";
+            } else {
+                resultElem.textContent = "❌ Incorrect. This was AI-generated.";
+                resultElem.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+</html>
