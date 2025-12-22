@@ -15,14 +15,14 @@
             margin-bottom: 40px;
         }
         img {
-            max-width: 300px;
+            max-width: 320px;
             border: 2px solid #ccc;
             border-radius: 8px;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
-            margin: 10px;
+            margin: 8px;
             cursor: pointer;
         }
     </style>
@@ -30,8 +30,9 @@
 <body>
 
     <h1>Guess if the Photo is Real or AI-Generated</h1>
-    <p>Click your guess below each image!</p>
+    <p>Click your guess below each image</p>
 
+    <!-- PHOTO 1 -->
     <div class="photo-section">
         <h2>Photo 1</h2>
         <img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/ai/ChatGPT%20Image%20Dec%2022%2C%202025%2C%2012_04_51%20PM.png" alt="Photo 1"><br>
@@ -40,6 +41,7 @@
         <p id="result1"></p>
     </div>
 
+    <!-- PHOTO 2 -->
     <div class="photo-section">
         <h2>Photo 2</h2>
         <img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/ai/c1bf0620-c736-4263-9783-8e401bbbf22a-md.jpeg" alt="Photo 2"><br>
@@ -48,24 +50,7 @@
         <p id="result2"></p>
     </div>
 
-    <script>
-        // Both photos are AI
-        const answers = {
-            1: 'ai',
-            2: 'ai'
-        };
-
-        function checkAnswer(photoNumber, guess) {
-            const resultElem = document.getElementById(`result${photoNumber}`);
-            if (guess === answers[photoNumber]) {
-                resultElem.textContent = "✅ Correct! This is AI-generated.";
-                resultElem.style.color = "green";
-            } else {
-                resultElem.textContent = "❌ Incorrect. This was AI-generated.";
-                resultElem.style.color = "red";
-            }
-        }
-    </script>
-
-</body>
-</html>
+    <!-- PHOTO 3 -->
+    <div class="photo-section">
+        <h2>Photo 3</h2>
+        <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNjk0OTdiZWYyNTkwODE5MWJjN2FiMmQ2MmQ5OWNhOWE6ZmlsZV8wMDAwMDAwMGI3OTQ3MjJmYmIwNWY2ODJlZTBmNGI4ZCIsInRzIjoiMjA0NDQiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImI5YmZlYmRiYTQ5OTg2YTU5ZDNlNTQ3MjA0ZjgyYzY5ZjVlYjUxMjU0ZWVkMjE3ZTE3MzEyMmVjYjA3ZTB_
