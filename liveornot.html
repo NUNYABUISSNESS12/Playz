@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Live Checker</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .live {
+      color: green;
+      font-size: 24px;
+    }
+    .offline {
+      color: red;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Check if BentleyPlayz is Live</h1>
+<p id="status">Checking...</p>
+
+<script>
+const API_KEY = "AIzaSyCe2GqXf79Vu3idT2zW24LGI2MF7IdkJYc";
+const CHANNEL_ID = "UCScF9sMw5r6LPjyHb03mVOg";
+
+async function checkLive() {
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${API_KEY}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const status = document.getElementById("status");
+
+    if (data.items && data.items.length > 0) {
+      status.textContent = "🔴 LIVE NOW!";
+      status.className = "live";
+    } else {
+      status.textContent = "⚫ Offline";
+      status.className = "offline";
+    }
+  } catch (err) {
+    document.getElementById("status").textContent = "Error checking status";
+  }
+}
+
+// Run once
+checkLive();
+
+// Refresh every 30 seconds
+setInterval(checkLive, 30000);
+</script>
+
+</body>
+</html>
