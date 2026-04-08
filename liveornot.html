@@ -1,55 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>YouTube Live Checker</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      margin-top: 40px;
-      background-color: #f5f5f5;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    h1 {
-      margin-bottom: 10px;
-    }
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bentley Playz - Live Status">
+    <meta property="og:description" content="Check if Bentley Playz is live right now and watch instantly!">
+    <meta property="og:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1">
+    <meta property="og:url" content="https://bentleyplayz.com/liveornot">
+    <meta property="og:type" content="website">
 
-    .live {
-      color: green;
-      font-size: 24px;
-      font-weight: bold;
-    }
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bentley Playz - Live Status">
+    <meta name="twitter:description" content="Check if Bentley Playz is live right now and watch instantly!">
+    <meta name="twitter:image" content="https://github.com/NUNYABUISSNESS12/Playz/blob/3ebb278e8ed3288c945e0899fd28ee6ef535c683/image.000000.jpg?raw=1">
+    <meta name="twitter:url" content="https://bentleyplayz.com/liveornot">
 
-    .offline {
-      color: red;
-      font-size: 24px;
-      font-weight: bold;
-    }
+    <title>Bentley Playz - Live Status</title>
 
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: green;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 40px;
+            background-color: #f5f5f5;
+        }
 
-    button:hover {
-      background-color: darkgreen;
-    }
+        h1 {
+            margin-bottom: 10px;
+        }
 
-    iframe {
-      margin-top: 20px;
-      border-radius: 10px;
-    }
-  </style>
+        .live {
+            color: green;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .offline {
+            color: red;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        iframe {
+            margin-top: 25px;
+            border-radius: 12px;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Check if BentleyPlayz is Live</h1>
+<h1>Bentley Playz - Live Status</h1>
 <p id="status">Checking...</p>
 
 <button onclick="checkLive()">🔄 Refresh</button>
@@ -73,7 +92,7 @@ async function checkLive() {
     if (data.items && data.items.length > 0) {
       const videoId = data.items[0].id.videoId;
 
-      status.textContent = "🔴 LIVE NOW!";
+      status.textContent = "🔴 Bentley Playz is LIVE!";
       status.className = "live";
 
       videoContainer.innerHTML = `
@@ -84,7 +103,7 @@ async function checkLive() {
         </iframe>
       `;
     } else {
-      status.textContent = "⚫ Offline";
+      status.textContent = "⚫ Bentley Playz is Offline";
       status.className = "offline";
       videoContainer.innerHTML = "";
     }
