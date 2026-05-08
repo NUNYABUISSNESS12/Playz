@@ -19,7 +19,7 @@
   "name": "Bentley’s Pizza",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "10 Hart Rd",
+    "streetAddress": "79 North St",
     "addressLocality": "Dryden",
     "addressRegion": "NY",
     "postalCode": "13053",
@@ -28,299 +28,212 @@
   "telephone": "6075922261",
   "servesCuisine": "Pizza",
   "url": "https://example.com",
-  "openingHours": "Mo-Su 11:00-22:00",
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 42.4906,
-    "longitude": -76.2966
-  }
+  "openingHours": "Mo-Su 11:00-22:00"
 }
 </script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
 body{background:#fff7f2;color:#333;}
-
 header{
-  position:sticky;
-  top:0;
-  background:#b22222;
-  color:white;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 20px;
-  z-index:1000;
+position:sticky;top:0;background:#b22222;color:white;
+display:flex;justify-content:space-between;align-items:center;
+padding:15px 20px;z-index:1000;
 }
 .logo{font-size:22px;font-weight:bold;}
-nav a{
-  color:white;
-  margin:0 10px;
-  text-decoration:none;
-  font-weight:500;
-}
+nav a{color:white;margin:0 10px;text-decoration:none;font-weight:500;}
 nav a:hover{text-decoration:underline;}
 .cart-btn{
-  background:#ffcc00;
-  border:none;
-  padding:8px 12px;
-  cursor:pointer;
-  font-weight:bold;
-  border-radius:5px;
+background:#ffcc00;border:none;padding:8px 12px;
+cursor:pointer;font-weight:bold;border-radius:5px;
 }
-
 .hero{
-  height:80vh;
-  background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-  url('https://via.placeholder.com/1600x900.png?text=Pizza+Hero') center/cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  text-align:center;
-  padding:20px;
+height:80vh;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url('https://via.placeholder.com/1600x900.png?text=Pizza+Hero') center/cover;
+display:flex;flex-direction:column;justify-content:center;
+align-items:center;color:white;text-align:center;padding:20px;
 }
 .hero h1{font-size:48px;margin-bottom:10px;}
 .hero button{
-  margin-top:20px;
-  padding:12px 20px;
-  background:#ffcc00;
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-  border-radius:5px;
+margin-top:20px;padding:12px 20px;background:#ffcc00;
+border:none;cursor:pointer;font-weight:bold;border-radius:5px;
 }
-
 section{padding:50px 20px;max-width:1100px;margin:auto;}
 h2{text-align:center;margin-bottom:20px;}
-
 .about-img{
-  width:100%;
-  max-width:700px;
-  display:block;
-  margin:20px auto;
-  border-radius:12px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+width:100%;max-width:700px;display:block;margin:20px auto;
+border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
-
 .menu-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 .card{
-  background:white;
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+background:white;padding:15px;border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 .card button{
-  margin-top:10px;
-  padding:8px;
-  width:100%;
-  background:#b22222;
-  color:white;
-  border:none;
-  cursor:pointer;
-  border-radius:5px;
+margin-top:10px;padding:8px;width:100%;
+background:#b22222;color:white;border:none;
+cursor:pointer;border-radius:5px;
 }
-
 #cartSidebar{
-  position:fixed;
-  right:-350px;
-  top:0;
-  width:300px;
-  height:100%;
-  background:white;
-  box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-  padding:20px;
-  transition:0.3s;
-  z-index:2000;
+position:fixed;right:-350px;top:0;width:300px;height:100%;
+background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+padding:20px;transition:0.3s;z-index:2000;
 }
 #cartSidebar.active{right:0;}
-
 .cart-item{display:flex;justify-content:space-between;margin:10px 0;}
 .cart-total{font-weight:bold;margin-top:10px;}
-
 .checkout{
-  margin-top:20px;
-  background:green;
-  color:white;
-  padding:10px;
-  border:none;
-  width:100%;
-  cursor:pointer;
+margin-top:20px;background:green;color:white;
+padding:10px;border:none;width:100%;cursor:pointer;
 }
-
 #modal{
-  position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.6);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:3000;
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.6);display:none;
+justify-content:center;align-items:center;z-index:3000;
 }
 .modal-content{
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  text-align:center;
+background:white;padding:20px;border-radius:10px;text-align:center;
 }
-
 .contact p{margin:8px 0;}
-
-footer{
-  text-align:center;
-  padding:20px;
-  background:#b22222;
-  color:white;
-}
+footer{text-align:center;padding:20px;background:#b22222;color:white;}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">Bentley’s Pizza</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#menu">Menu</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <button class="cart-btn" onclick="toggleCart()">Cart (<span id="cartCount">0</span>)</button>
+<div class="logo">Bentley’s Pizza</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#menu">Menu</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+<button class="cart-btn" onclick="toggleCart()">Cart (<span id="cartCount">0</span>)</button>
 </header>
 
 <section class="hero" id="home">
-  <h1>Fresh Pizza in Dryden, NY</h1>
-  <p>Hot, fresh, and made to order every time</p>
-  <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Order Now</button>
+<h1>Fresh Pizza in Dryden, NY</h1>
+<p>Now serving from our new location on North Street</p>
+<button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Order Now</button>
 </section>
 
 <section id="about">
-  <h2>About Us</h2>
-  <p style="text-align:center;">
-    Bentley’s Pizza is a cozy local-style pizza restaurant located in Dryden, New York.
-    We serve handcrafted pizzas, wings, and sides made fresh daily with quality ingredients.
-  </p>
-
-  <img class="about-img" src="https://i.ibb.co/pj0jQG3k/BCO-909152d9-d456-4ef8-a02e-aa2da0fb1636.png" alt="Bentley’s Pizza Restaurant Image">
+<h2>About Us</h2>
+<p style="text-align:center;">
+Bentley’s Pizza is now proudly serving Dryden from our new North Street location.
+Fresh handcrafted pizzas, wings, and sides made daily with quality ingredients.
+</p>
+<img class="about-img" src="https://i.ibb.co/pj0jQG3k/BCO-909152d9-d456-4ef8-a02e-aa2da0fb1636.png" alt="Bentley’s Pizza">
 </section>
 
 <section id="menu">
-  <h2>Menu</h2>
-  <div class="menu-grid" id="menuGrid"></div>
+<h2>Menu</h2>
+<div class="menu-grid" id="menuGrid"></div>
 </section>
 
 <section class="contact" id="contact">
-  <h2>Contact</h2>
-  <p><strong>Bentley’s Pizza</strong></p>
-  <p>10 Hart Rd, Dryden, NY 13053</p>
-  <p><a href="tel:6075922261">6075922261</a></p>
+<h2>Contact</h2>
+<p><strong>Bentley’s Pizza</strong></p>
+<p>79 North St, Dryden, NY 13053</p>
+<p><a href="tel:6075922261">607-592-2261</a></p>
 </section>
 
 <footer>
-  © 2026 Bentley’s Pizza - Dryden, NY
+© 2026 Bentley’s Pizza - 79 North St, Dryden NY
 </footer>
 
 <div id="cartSidebar">
-  <h3>Your Cart</h3>
-  <div id="cartItems"></div>
-  <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
-  <button class="checkout" onclick="checkout()">Purchase</button>
+<h3>Your Cart</h3>
+<div id="cartItems"></div>
+<div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
+<button class="checkout" onclick="checkout()">Purchase</button>
 </div>
 
 <div id="modal">
-  <div class="modal-content">
-    <h2>Just Kidding 😄</h2>
-    <p>This is a demo website. Bentley’s Pizza is not a real business and no orders are processed.</p>
-    <button onclick="closeModal()">Close</button>
-  </div>
+<div class="modal-content">
+<h2>Store Offline</h2>
+<p>Online ordering is temporarily unavailable. Please call us at 607-592-2261.</p>
+<button onclick="closeModal()">Close</button>
+</div>
 </div>
 
 <script>
 const menuItems = [
-  {name:"Pepperoni Pizza",price:14.99},
-  {name:"Cheese Pizza",price:12.99},
-  {name:"Veggie Pizza",price:13.99},
-  {name:"Supreme Pizza",price:16.99},
-  {name:"BBQ Chicken Pizza",price:15.99},
-  {name:"Margherita Pizza",price:13.49},
-  {name:"Garlic Knots",price:6.99},
-  {name:"Chicken Wings",price:11.99},
-  {name:"Mozzarella Sticks",price:7.99},
-  {name:"Soda",price:2.49}
+{name:"Pepperoni Pizza",price:14.99},
+{name:"Cheese Pizza",price:12.99},
+{name:"Veggie Pizza",price:13.99},
+{name:"Supreme Pizza",price:16.99},
+{name:"BBQ Chicken Pizza",price:15.99},
+{name:"Margherita Pizza",price:13.49},
+{name:"Garlic Knots",price:6.99},
+{name:"Chicken Wings",price:11.99},
+{name:"Mozzarella Sticks",price:7.99},
+{name:"Soda",price:2.49}
 ];
 
-let cart = [];
+let cart=[];
 
 function renderMenu(){
-  const grid = document.getElementById("menuGrid");
-  menuItems.forEach((item, index)=>{
-    const div = document.createElement("div");
-    div.className="card";
-    div.innerHTML=`
-      <h3>${item.name}</h3>
-      <p>$${item.price.toFixed(2)}</p>
-      <button onclick="addToCart(${index})">Add to Cart</button>
-    `;
-    grid.appendChild(div);
-  });
+const grid=document.getElementById("menuGrid");
+menuItems.forEach((item,index)=>{
+const div=document.createElement("div");
+div.className="card";
+div.innerHTML=`
+<h3>${item.name}</h3>
+<p>$${item.price.toFixed(2)}</p>
+<button onclick="addToCart(${index})">Add to Cart</button>`;
+grid.appendChild(div);
+});
 }
 
 function addToCart(i){
-  const item = menuItems[i];
-  const existing = cart.find(c=>c.name===item.name);
-  if(existing){
-    existing.qty++;
-  } else {
-    cart.push({...item, qty:1});
-  }
-  updateCart();
+const item=menuItems[i];
+const existing=cart.find(c=>c.name===item.name);
+if(existing){existing.qty++;}
+else{cart.push({...item,qty:1});}
+updateCart();
 }
 
 function updateCart(){
-  const cartItems = document.getElementById("cartItems");
-  cartItems.innerHTML="";
-  let total=0;
-  let count=0;
+const cartItems=document.getElementById("cartItems");
+cartItems.innerHTML="";
+let total=0,count=0;
 
-  cart.forEach(item=>{
-    total += item.price * item.qty;
-    count += item.qty;
+cart.forEach(item=>{
+total+=item.price*item.qty;
+count+=item.qty;
+const div=document.createElement("div");
+div.className="cart-item";
+div.innerHTML=`
+<span>${item.name} x${item.qty}</span>
+<span>$${(item.price*item.qty).toFixed(2)}</span>`;
+cartItems.appendChild(div);
+});
 
-    const div = document.createElement("div");
-    div.className="cart-item";
-    div.innerHTML=`
-      <span>${item.name} x${item.qty}</span>
-      <span>$${(item.price*item.qty).toFixed(2)}</span>
-    `;
-    cartItems.appendChild(div);
-  });
-
-  document.getElementById("cartTotal").innerText=total.toFixed(2);
-  document.getElementById("cartCount").innerText=count;
+document.getElementById("cartTotal").innerText=total.toFixed(2);
+document.getElementById("cartCount").innerText=count;
 }
 
 function toggleCart(){
-  document.getElementById("cartSidebar").classList.toggle("active");
+document.getElementById("cartSidebar").classList.toggle("active");
 }
 
 function checkout(){
-  document.getElementById("modal").style.display="flex";
+document.getElementById("modal").style.display="flex";
 }
 
 function closeModal(){
-  document.getElementById("modal").style.display="none";
+document.getElementById("modal").style.display="none";
 }
 
 renderMenu();
 </script>
 
 </body>
-</html>
-
+  </html>
