@@ -2,165 +2,330 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Bentleyâ€™s Pizza | Fictional Demo Restaurant</title>
-<meta name="description" content="Bentleyâ€™s Pizza is a fictional demo pizza restaurant website created for portfolio and testing purposes.">
-<meta name="keywords" content="demo pizza website, fictional restaurant, Bentleyâ€™s Pizza, sample restaurant site">
+<title>Bentley’s Pizza</title>
+<meta name="description" content="Bentley’s Pizza serving hot fresh pizza, wings, sides, and more in Dryden, NY.">
+<meta name="keywords" content="pizza, Bentley’s Pizza, Dryden NY pizza, wings, takeout">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta property="og:title" content="Bentleyâ€™s Pizza (Demo)">
-<meta property="og:description" content="A fictional pizza restaurant website created for demonstration purposes.">
+<meta property="og:title" content="Bentley’s Pizza">
+<meta property="og:description" content="Hot fresh pizza, wings, sides, and more.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Bentley%27s+Pizza+Demo">
+<meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Bentley%27s+Pizza">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Restaurant",
-  "name": "Bentleyâ€™s Pizza (Demo)",
+  "name": "Bentley’s Pizza",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "123 Demo Street",
+    "streetAddress": "10 Hart Rd",
     "addressLocality": "Dryden",
     "addressRegion": "NY",
     "postalCode": "13053",
     "addressCountry": "US"
   },
-  "telephone": "0000000000",
+  "telephone": "6075922261",
   "servesCuisine": "Pizza",
-  "url": "https://example.com",
-  "openingHours": "Mo-Su 00:00-00:00"
+  "openingHours": "Mo-Su 10:00-22:00"
 }
 </script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{background:#fff7f2;color:#333;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#fff7f2;
+color:#333;
+}
+
 header{
-position:sticky;top:0;background:#b22222;color:white;
-display:flex;justify-content:space-between;align-items:center;
-padding:15px 20px;z-index:1000;
+position:sticky;
+top:0;
+background:#b22222;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+z-index:1000;
 }
-.logo{font-size:22px;font-weight:bold;}
-nav a{color:white;margin:0 10px;text-decoration:none;font-weight:500;}
-nav a:hover{text-decoration:underline;}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+}
+
+nav a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+font-weight:500;
+}
+
+nav a:hover{
+text-decoration:underline;
+}
+
 .cart-btn{
-background:#ffcc00;border:none;padding:8px 12px;
-cursor:pointer;font-weight:bold;border-radius:5px;
+background:#ffcc00;
+border:none;
+padding:8px 12px;
+cursor:pointer;
+font-weight:bold;
+border-radius:5px;
 }
+
 .hero{
 height:80vh;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+background:
+linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
 url('https://via.placeholder.com/1600x900.png?text=Pizza+Hero') center/cover;
-display:flex;flex-direction:column;justify-content:center;
-align-items:center;color:white;text-align:center;padding:20px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+padding:20px;
 }
-.hero h1{font-size:48px;margin-bottom:10px;}
+
+.hero h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+max-width:700px;
+}
+
 .hero button{
-margin-top:20px;padding:12px 20px;background:#ffcc00;
-border:none;cursor:pointer;font-weight:bold;border-radius:5px;
+margin-top:20px;
+padding:12px 20px;
+background:#ffcc00;
+border:none;
+cursor:pointer;
+font-weight:bold;
+border-radius:5px;
 }
-section{padding:50px 20px;max-width:1100px;margin:auto;}
-h2{text-align:center;margin-bottom:20px;}
+
+section{
+padding:50px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
 .about-img{
-width:100%;max-width:700px;display:block;margin:20px auto;
-border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.2);
+width:100%;
+max-width:700px;
+display:block;
+margin:20px auto;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
+
 .menu-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 }
+
 .card{
-background:white;padding:15px;border-radius:10px;
+background:white;
+padding:15px;
+border-radius:10px;
 box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
+
 .card button{
-margin-top:10px;padding:8px;width:100%;
-background:#b22222;color:white;border:none;
-cursor:pointer;border-radius:5px;
+margin-top:10px;
+padding:8px;
+width:100%;
+background:#b22222;
+color:white;
+border:none;
+cursor:pointer;
+border-radius:5px;
 }
+
 #cartSidebar{
-position:fixed;right:-350px;top:0;width:300px;height:100%;
-background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-padding:20px;transition:0.3s;z-index:2000;
+position:fixed;
+right:-350px;
+top:0;
+width:300px;
+height:100%;
+background:white;
+box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+padding:20px;
+transition:0.3s;
+z-index:2000;
 }
-#cartSidebar.active{right:0;}
-.cart-item{display:flex;justify-content:space-between;margin:10px 0;}
-.cart-total{font-weight:bold;margin-top:10px;}
+
+#cartSidebar.active{
+right:0;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+}
+
+.cart-total{
+font-weight:bold;
+margin-top:10px;
+}
+
 .checkout{
-margin-top:20px;background:green;color:white;
-padding:10px;border:none;width:100%;cursor:pointer;
+margin-top:20px;
+background:green;
+color:white;
+padding:10px;
+border:none;
+width:100%;
+cursor:pointer;
 }
+
 #modal{
-position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.6);display:none;
-justify-content:center;align-items:center;z-index:3000;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:3000;
 }
+
 .modal-content{
-background:white;padding:20px;border-radius:10px;text-align:center;
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
 }
-.contact p{margin:8px 0;}
-footer{text-align:center;padding:20px;background:#b22222;color:white;}
+
+.modal-content button{
+margin-top:15px;
+padding:10px 18px;
+border:none;
+background:#b22222;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.contact p{
+margin:8px 0;
+text-align:center;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:#b22222;
+color:white;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">Bentleyâ€™s Pizza (Demo)</div>
+<div class="logo">Bentley’s Pizza</div>
+
 <nav>
 <a href="#home">Home</a>
 <a href="#menu">Menu</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
 </nav>
-<button class="cart-btn" onclick="toggleCart()">Cart (<span id="cartCount">0</span>)</button>
+
+<button class="cart-btn" onclick="toggleCart()">
+Cart (<span id="cartCount">0</span>)
+</button>
 </header>
 
 <section class="hero" id="home">
-<h1>Fictional Pizza Restaurant Demo</h1>
-<p>This website is not a real business. No orders are processed.</p>
-<button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">View Menu</button>
+<h1>Fresh Pizza in Dryden, NY</h1>
+<p>
+Hot fresh pizza, wings, cheesy sides, and more made fresh every day.
+</p>
+
+<button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
+View Menu
+</button>
 </section>
 
 <section id="about">
-<h2>About This Demo</h2>
+<h2>About Us</h2>
+
 <p style="text-align:center;">
-Bentleyâ€™s Pizza is a fictional restaurant created for demonstration, testing, and portfolio use.
-No real food is served and no orders are accepted.
+Bentley’s Pizza serves handcrafted pizzas, wings, garlic knots,
+and classic sides made fresh with quality ingredients.
 </p>
-<img class="about-img" src="https://i.ibb.co/pj0jQG3k/BCO-909152d9-d456-4ef8-a02e-aa2da0fb1636.png" alt="Bentleyâ€™s Pizza Demo">
+
+<img
+class="about-img"
+src="https://i.ibb.co/pj0jQG3k/BCO-909152d9-d456-4ef8-a02e-aa2da0fb1636.png"
+alt="Bentley’s Pizza">
 </section>
 
 <section id="menu">
-<h2>Menu (Demo Only)</h2>
+<h2>Menu</h2>
+
 <div class="menu-grid" id="menuGrid"></div>
 </section>
 
 <section class="contact" id="contact">
 <h2>Contact</h2>
-<p><strong>Bentleyâ€™s Pizza (Demo)</strong></p>
-<p>123 Demo Street, Dryden, NY 13053</p>
-<p>000â€‘000â€‘0000</p>
-<p>This is a fictional website. Do not attempt to contact.</p>
+
+<p><strong>Bentley’s Pizza</strong></p>
+<p>10 Hart Rd, Dryden, NY 13053</p>
+<p>(607) 592-2261</p>
 </section>
 
 <footer>
-Â© 2026 Bentleyâ€™s Pizza (Demo) â€” This is not a real restaurant.
+© 2026 Bentley’s Pizza
 </footer>
 
 <div id="cartSidebar">
 <h3>Your Cart</h3>
+
 <div id="cartItems"></div>
-<div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
-<button class="checkout" onclick="checkout()">Purchase</button>
+
+<div class="cart-total">
+Total: $<span id="cartTotal">0.00</span>
+</div>
+
+<button class="checkout" onclick="checkout()">
+Purchase
+</button>
 </div>
 
 <div id="modal">
 <div class="modal-content">
-<h2>Just Kidding ðŸ˜„</h2>
-<p>This is a demo website. Bentleyâ€™s Pizza is not a real business and no orders are processed.</p>
-<button onclick="closeModal()">Close</button>
+<h2>Just Kidding </h2>
+
+<p>
+This is a demo website. Bentley’s Pizza is not a real business and no orders are processed.
+</p>
+
+<button onclick="closeModal()">
+Close
+</button>
 </div>
 </div>
 
@@ -178,47 +343,69 @@ const menuItems = [
 {name:"Soda",price:2.49}
 ];
 
-let cart=[];
+let cart = [];
 
 function renderMenu(){
-const grid=document.getElementById("menuGrid");
+const grid = document.getElementById("menuGrid");
+
 menuItems.forEach((item,index)=>{
-const div=document.createElement("div");
-div.className="card";
-div.innerHTML=`
+const div = document.createElement("div");
+
+div.className = "card";
+
+div.innerHTML = `
 <h3>${item.name}</h3>
 <p>$${item.price.toFixed(2)}</p>
-<button onclick="addToCart(${index})">Add to Cart</button>`;
+<button onclick="addToCart(${index})">
+Add to Cart
+</button>
+`;
+
 grid.appendChild(div);
 });
 }
 
 function addToCart(i){
-const item=menuItems[i];
-const existing=cart.find(c=>c.name===item.name);
-if(existing){existing.qty++;}
-else{cart.push({...item,qty:1});}
+const item = menuItems[i];
+
+const existing = cart.find(c => c.name === item.name);
+
+if(existing){
+existing.qty++;
+}else{
+cart.push({...item,qty:1});
+}
+
 updateCart();
 }
 
 function updateCart(){
-const cartItems=document.getElementById("cartItems");
-cartItems.innerHTML="";
-let total=0,count=0;
+const cartItems = document.getElementById("cartItems");
 
-cart.forEach(item=>{
-total+=item.price*item.qty;
-count+=item.qty;
-const div=document.createElement("div");
-div.className="cart-item";
-div.innerHTML=`
+cartItems.innerHTML = "";
+
+let total = 0;
+let count = 0;
+
+cart.forEach(item => {
+
+total += item.price * item.qty;
+count += item.qty;
+
+const div = document.createElement("div");
+
+div.className = "cart-item";
+
+div.innerHTML = `
 <span>${item.name} x${item.qty}</span>
-<span>$${(item.price*item.qty).toFixed(2)}</span>`;
+<span>$${(item.price * item.qty).toFixed(2)}</span>
+`;
+
 cartItems.appendChild(div);
 });
 
-document.getElementById("cartTotal").innerText=total.toFixed(2);
-document.getElementById("cartCount").innerText=count;
+document.getElementById("cartTotal").innerText = total.toFixed(2);
+document.getElementById("cartCount").innerText = count;
 }
 
 function toggleCart(){
@@ -226,11 +413,11 @@ document.getElementById("cartSidebar").classList.toggle("active");
 }
 
 function checkout(){
-document.getElementById("modal").style.display="flex";
+document.getElementById("modal").style.display = "flex";
 }
 
 function closeModal(){
-document.getElementById("modal").style.display="none";
+document.getElementById("modal").style.display = "none";
 }
 
 renderMenu();
