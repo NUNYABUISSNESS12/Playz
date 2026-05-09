@@ -2,34 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Bentley’s Pizza</title>
-<meta name="description" content="Bentley’s Pizza serving hot fresh pizza, wings, sides, and more in Dryden, NY.">
-<meta name="keywords" content="pizza, Bentley’s Pizza, Dryden NY pizza, wings, takeout">
+<title>Bentley's Pizza</title>
+<meta name="description" content="Bentley's Pizza serving hot fresh pizza, wings, sides, and more in Dryden, NY.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta property="og:title" content="Bentley’s Pizza">
-<meta property="og:description" content="Hot fresh pizza, wings, sides, and more.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Bentley%27s+Pizza">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Restaurant",
-  "name": "Bentley’s Pizza",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "10 Hart Rd",
-    "addressLocality": "Dryden",
-    "addressRegion": "NY",
-    "postalCode": "13053",
-    "addressCountry": "US"
-  },
-  "telephone": "6075922261",
-  "servesCuisine": "Pizza",
-  "openingHours": "Mo-Su 10:00-22:00"
-}
-</script>
 
 <style>
 *{
@@ -218,11 +193,6 @@ text-align:center;
 max-width:400px;
 }
 
-.modal-content h2 {
-color: #b22222;
-margin-bottom: 15px;
-}
-
 .modal-content button{
 margin-top:20px;
 padding:10px 18px;
@@ -231,11 +201,6 @@ background:#b22222;
 color:white;
 border-radius:5px;
 cursor:pointer;
-}
-
-.contact p{
-margin:8px 0;
-text-align:center;
 }
 
 footer{
@@ -250,7 +215,7 @@ color:white;
 <body>
 
 <header>
-<div class="logo">Bentley’s Pizza</div>
+<div class="logo">Bentley's Pizza</div>
 
 <nav>
 <a href="#home">Home</a>
@@ -266,70 +231,46 @@ Cart (<span id="cartCount">0</span>)
 
 <section class="hero" id="home">
 <h1>Fresh Pizza in Dryden, NY</h1>
-<p>
-Hot fresh pizza, wings, cheesy sides, and more made fresh every day.
-</p>
-
-<button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
-View Menu
-</button>
+<p>Hot fresh pizza, wings, cheesy sides, and more made fresh every day.</p>
+<button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">View Menu</button>
 </section>
 
 <section id="about">
 <h2>About Us</h2>
-
 <p style="text-align:center;">
-Bentley’s Pizza serves handcrafted pizzas, wings, garlic knots,
-and classic sides made fresh with quality ingredients.
+Bentley's Pizza serves handcrafted pizzas, wings, garlic knots, and classic sides made fresh with quality ingredients.
 </p>
-
-<img
-class="about-img"
-src="https://i.ibb.co/pj0jQG3k/BCO-909152d9-d456-4ef8-a02e-aa2da0fb1636.png"
-alt="Bentley’s Pizza">
+<img class="about-img" src="https://i.ibb.co/pj0jQG3k/BCO-909152d9-d456-4ef8-a02e-aa2da0fb1636.png" alt="Bentley's Pizza">
 </section>
 
 <section id="menu">
 <h2>Menu</h2>
-
 <div class="menu-grid" id="menuGrid"></div>
 </section>
 
-<section class="contact" id="contact">
+<section class="contact" id="contact" style="text-align:center;">
 <h2>Contact</h2>
-
-<p><strong>Bentley’s Pizza</strong></p>
+<p><strong>Bentley's Pizza</strong></p>
 <p>10 Hart Rd, Dryden, NY 13053</p>
 <p>(607) 592-2261</p>
 </section>
 
 <footer>
-© 2026 Bentley’s Pizza
+&copy; 2026 Bentley's Pizza
 </footer>
 
 <div id="cartSidebar">
 <h3>Your Cart</h3>
-
 <div id="cartItems"></div>
-
-<div class="cart-total">
-Total: $<span id="cartTotal">0.00</span>
+<div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
+<button class="checkout" onclick="checkout()">Purchase</button>
 </div>
 
-<button class="checkout" onclick="checkout()">
-Purchase
-</button>
-</div>
-
-<!-- Updated Purchase Screen Modal -->
 <div id="modal">
 <div class="modal-content">
 <h2>Just kidding!</h2>
 <p>This business does not exist.</p>
-
-<button onclick="closeModal()">
-Close
-</button>
+<button onclick="closeModal()">Close</button>
 </div>
 </div>
 
@@ -351,63 +292,42 @@ let cart = [];
 
 function renderMenu(){
 const grid = document.getElementById("menuGrid");
-
 menuItems.forEach((item,index)=>{
 const div = document.createElement("div");
-
 div.className = "card";
-
 div.innerHTML = `
 <h3>${item.name}</h3>
 <p>$${item.price.toFixed(2)}</p>
-<button onclick="addToCart(${index})">
-Add to Cart
-</button>
+<button onclick="addToCart(${index})">Add to Cart</button>
 `;
-
 grid.appendChild(div);
 });
 }
 
 function addToCart(i){
 const item = menuItems[i];
-
 const existing = cart.find(c => c.name === item.name);
-
 if(existing){
 existing.qty++;
 }else{
 cart.push({...item,qty:1});
 }
-
 updateCart();
 }
 
 function updateCart(){
 const cartItems = document.getElementById("cartItems");
-
 cartItems.innerHTML = "";
-
 let total = 0;
 let count = 0;
-
 cart.forEach(item => {
-
 total += item.price * item.qty;
 count += item.qty;
-
 const div = document.createElement("div");
-
 div.className = "cart-item";
-
-div.innerHTML = `
-<span>${item.name} x${item.qty}</span>
-<span>$${(item.price * item.qty).toFixed(2)}</span>
-`;
-
+div.innerHTML = `<span>${item.name} x${item.qty}</span><span>$${(item.price * item.qty).toFixed(2)}</span>`;
 cartItems.appendChild(div);
 });
-
 document.getElementById("cartTotal").innerText = total.toFixed(2);
 document.getElementById("cartCount").innerText = count;
 }
